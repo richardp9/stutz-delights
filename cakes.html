@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stutz Delights | Cakes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf9f7;
+    --card: rgba(255,255,255,0.96);
+    --line: rgba(29,29,31,0.08);
+    --text: #1d1d1f;
+    --muted: #6e6e73;
+    --gold: #b8972a;
+    --gold-light: #d4b44a;
+    --gold-soft: rgba(184,151,42,0.10);
+    --shadow: 0 20px 44px rgba(17,17,26,0.07);
+    --radius: 28px;
+    --max: 1240px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    color: var(--text);
+    background:
+      radial-gradient(circle at top left, rgba(184,151,42,0.06), transparent 28%),
+      linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  .container { width: min(calc(100% - 2rem), var(--max)); margin: 0 auto; }
+  .site-header { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(18px); background: rgba(251,251,253,0.72); border-bottom: 1px solid rgba(29,29,31,0.06); }
+  .site-header .container { display: grid; justify-items: center; gap: 0.7rem; padding: 0.65rem 0 0.9rem; }
+  .brand-logo { width: 96px; height: auto; display: block; }
+  .nav-links { display: flex; align-items: center; justify-content: space-evenly; width: 100%; color: var(--muted); font-size: 0.96rem; }
+  .nav-links a { transition: color 180ms ease; }
+  .nav-links a:hover, .nav-links a:focus-visible { color: var(--text); }
+  .nav-links a.active { color: var(--text); font-weight: 600; }
+  .header-bar { display: flex; align-items: center; width: 100%; justify-content: center; }
+  .nav-toggle { display: none; }
+  @media (max-width: 820px) {
+    .site-header .container { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 0; min-height: 60px; }
+    .header-bar { justify-content: flex-end; }
+    .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: rgba(251,251,253,0.97); border-bottom: 1px solid rgba(29,29,31,0.08); backdrop-filter: blur(18px); z-index: 30; padding: 0.5rem 0; }
+    .nav-links.open { display: flex; }
+    .nav-links a { padding: 0.9rem 1.5rem; font-size: 1rem; border-bottom: 1px solid rgba(29,29,31,0.06); }
+    .nav-links a:last-child { border-bottom: none; }
+    .nav-toggle { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid rgba(29,29,31,0.1); border-radius: 12px; background: rgba(255,255,255,0.8); color: var(--text); cursor: pointer; }
+    .grid { grid-template-columns: 1fr; }
+  }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 46px; padding: 0 1.25rem;
+    border: 1px solid rgba(184,151,42,0.3); background: rgba(255,255,255,0.9);
+    color: var(--text); font-weight: 600; font-size: 0.9rem;
+    letter-spacing: 0.01em;
+    border-radius: 6px;
+    transition: border-color 180ms ease, background 180ms ease, color 180ms ease;
+  }
+  .btn:hover { border-color: var(--gold); background: var(--gold-soft); color: var(--gold); }
+  .btn-primary {
+    border-color: var(--gold);
+    background: transparent;
+    color: var(--gold);
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    box-shadow: none;
+  }
+  .btn-primary:hover {
+    background: var(--gold);
+    color: #fff;
+    border-color: var(--gold);
+  }
+  main { padding: 3rem 0 4rem; }
+  .intro { display: grid; gap: 1rem; margin-bottom: 2rem; }
+  .eyebrow {
+    font-size: 0.78rem; font-weight: 700; color: var(--gold);
+    text-transform: uppercase; letter-spacing: 0.18em;
+  }
+  h1 {
+    margin: 0; font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(2.8rem, 7vw, 4.8rem); letter-spacing: -0.02em; line-height: 0.95;
+  }
+  .intro p { margin: 0; max-width: 45rem; color: var(--muted); font-size: 1.02rem; line-height: 1.8; }
+  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.2rem; }
+  .card {
+    overflow: hidden; border-radius: var(--radius); background: var(--card);
+    border: 1px solid rgba(184,151,42,0.1); box-shadow: var(--shadow);
+    display: grid;
+    transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+  }
+  .card:hover {
+    border-color: rgba(184,151,42,0.28);
+    box-shadow: 0 28px 56px rgba(184,151,42,0.1);
+    transform: translateY(-3px);
+  }
+  .card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; background: #f5f3ef; }
+  .copy { padding: 1.15rem 1.15rem 1.35rem; display: grid; gap: 0.7rem; }
+  .meta { display: flex; align-items: start; justify-content: space-between; gap: 1rem; }
+  .meta h2 { margin: 0; font-family: "Cormorant Garamond", Georgia, serif; font-size: 1.4rem; letter-spacing: 0; }
+  .price { color: var(--gold); font-weight: 700; white-space: nowrap; font-size: 0.95rem; }
+  .copy p { margin: 0; color: var(--muted); line-height: 1.7; font-size: 0.93rem; }
+  .copy a { width: fit-content; }
+  footer { padding: 0 0 2rem; }
+  .foot { color: var(--muted); font-size: 0.9rem; }
+  @media (max-width: 960px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) {
+    .header .container { padding: 0.85rem 0 1rem; }
+    .brand img { width: 86px; height: auto; }
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" aria-label="Stutz Delights home">
+        <img class="brand-logo" src="logo-transparent.svg" alt="Stutz Delights logo">
+      </a>
+      <div class="header-bar">
+        <nav class="nav-links" id="nav-links" aria-label="Primary navigation">
+          <a href="index.html">Home</a>
+          <a href="cakes.html" class="active">Cakes</a>
+          <a href="desserts.html">Desserts</a>
+          <a href="truffles.html">Truffles</a>
+          <a href="index.html#inquiry">Order Inquiry</a>
+        </nav>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <section class="intro">
+        <span class="eyebrow">Custom Cakes</span>
+        <h1>Choose a cake style and add it to the order.</h1>
+      </section>
+      <section class="grid" id="grid"></section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container foot">Stutz Delights cakes catalog. Add any cake to the order and continue in the inquiry form.</div>
+  </footer>
+
+<script>
+const items = [
+  { title: "Red Passion", file: "Cakes/Red Passion.PNG", price: "$78", description: "Velvety red cake soaked in red berry syrup, layered with cream cheese–infused brigadeiro and homemade berry jam. Elegant, fruity, and indulgent." },
+  { title: "Pistachio Whisper", file: "Cakes/Pistachio Whisper.PNG", price: "$78", description: "Fluffy white cake layered with silky pistachio cream and vibrant raspberry jelly. Draped in pistachio mousse and crowned with pistachio truffles and fresh raspberries." },
+  { title: "Cocoa Pearl", file: "Cakes/Cocoa Pearl.png", price: "$72", description: "Chocolate cake moistened with coconut milk syrup and layered with homemade coconut brigadeiro. Topped with ganache, chocolate sprinkles, coconut flakes, and delicate coconut truffles." },
+  { title: "Choco Harmony", file: "Cakes/Choco Harmony.PNG", price: "$75", description: "Tender chocolate cake layered with our signature brigadeiro and white chocolate truffle cream. Finished with ganache, chocolate shavings, fresh strawberries, and chocolate truffles." },
+  { title: "Passion Bloom", file: "Cakes/Passion Bloom.PNG", price: "$78", description: "Chocolate cake soaked in passion fruit syrup, layered with passion fruit and chocolate mousse. Topped with chocolate whipped cream and a bright passion fruit jelly." },
+  { title: "Orange Noir", file: "Cakes/Orange Noir.jpeg", price: "$78", description: "Intense dark chocolate sponge, lightly soaked with orange syrup, layered with classic chocolate brigadeiro and house-made orange marmalade. A refined balance of deep cocoa richness and bright citrus elegance." },
+  { title: "Midnight", file: "Cakes/Midnight.jpeg", price: "$78", description: "Intense chocolate sponge, delicately soaked with cherry syrup, layered with rich chocolate brigadeiro and a vibrant red berry jam. A bold, elegant cake where deep cocoa meets bright fruit notes in perfect harmony." },
+  { title: "Tropical Muse", file: "Cakes/Tropical Muse.jpeg", price: "$72", description: "White cake soaked in pineapple syrup, layered with smooth cream and fresh pineapple pieces. Covered in whipped cream and garnished with sweetened coconut flakes and pineapple slices." },
+  { title: "Noble Nut", file: "Cakes/Noble Nut.PNG", price: "$78", description: "Walnut cake layered with chocolate mousse and walnut mousse, topped with a light meringue and crushed walnuts. Nutty, airy, and elegantly understated." },
+  { title: "Nutella", file: "Cakes/Nutella.png", price: "$78", description: "Chocolate cake layered with Nutella brigadeiro and crispy chocolate pearls. Finished with a cloud of white brigadeiro cream blended with cream cheese." },
+  { title: "Lemon Bliss", file: "Cakes/Lemon Bliss.jpeg", price: "$78", description: "Soft white cake layered with bright lemon cream and a blueberry filling. Finished with fresh blueberries for a clean, refreshing bite." },
+  { title: "Custom", file: "Cakes/Custom.png", price: "Price varies", description: "A fully custom cake designed around your event, aesthetic, and vision. Share your ideas and we'll bring them to life." }
+];
+const catalogIndex = {
+  cakes: items.map((i) => i.title.toLowerCase()),
+  desserts: ["dessert assortment","signature dessert table","featured dessert selection","mousse de maracuja com chocolate","tiramisu manga","uva"],
+  truffles: ["chocolate","churros","coconut","creme burle","goiabada","limao","meio a meio"]
+};
+const params = new URLSearchParams(window.location.search);
+const searchTerm = (params.get("search") || "").trim().toLowerCase();
+const grid = document.getElementById("grid");
+const visibleItems = searchTerm ? items.filter((item) => item.title.toLowerCase().includes(searchTerm)) : items;
+const renderItems = visibleItems.length ? visibleItems : items;
+
+renderItems.forEach((item) => {
+  const href = `index.html?product=${encodeURIComponent("Custom Cake")}&item=${encodeURIComponent(item.title)}#inquiry`;
+  const card = document.createElement("article");
+  card.className = "card";
+  card.innerHTML = `
+    <img src="${item.file}" alt="${item.title}">
+    <div class="copy">
+      <div class="meta">
+        <h2>${item.title}</h2>
+        <span class="price">${item.price.startsWith("Price") ? item.price : "From " + item.price + `<span style="font-size:0.75em;font-weight:500;opacity:0.75"> · 8 in / 12 slices</span>`}</span>
+      </div>
+      <p>${item.description}</p>
+      <a class="btn btn-primary" href="${href}">Add to Order</a>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+
+const navToggle = document.getElementById("nav-toggle");
+const navLinks = document.getElementById("nav-links");
+navToggle.addEventListener("click", () => {
+  const open = navLinks.classList.toggle("open");
+  navToggle.setAttribute("aria-expanded", open);
+});
+navLinks.querySelectorAll("a").forEach(a => {
+  a.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    navToggle.setAttribute("aria-expanded", "false");
+  });
+});
+</script>
+</body>
+</html>

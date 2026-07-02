@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stutz Delights | Truffles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf9f7; --card: rgba(255,255,255,0.96); --line: rgba(29,29,31,0.08);
+    --text: #1d1d1f; --muted: #6e6e73;
+    --gold: #b8972a; --gold-light: #d4b44a; --gold-soft: rgba(184,151,42,0.10);
+    --shadow: 0 20px 44px rgba(17,17,26,0.07); --radius: 28px; --max: 1240px;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Inter", sans-serif; color: var(--text); background: radial-gradient(circle at top left, rgba(184,151,42,0.06), transparent 28%), linear-gradient(180deg, #ffffff 0%, var(--bg) 100%); }
+  a { color: inherit; text-decoration: none; } img { max-width: 100%; display: block; }
+  .container { width: min(calc(100% - 2rem), var(--max)); margin: 0 auto; }
+  .site-header { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(18px); background: rgba(251,251,253,0.72); border-bottom: 1px solid rgba(29,29,31,0.06); }
+  .site-header .container { display: grid; justify-items: center; gap: 0.7rem; padding: 0.65rem 0 0.9rem; }
+  .brand-logo { width: 96px; height: auto; display: block; }
+  .nav-links { display: flex; align-items: center; justify-content: space-evenly; width: 100%; color: var(--muted); font-size: 0.96rem; }
+  .nav-links a { transition: color 180ms ease; }
+  .nav-links a:hover, .nav-links a:focus-visible { color: var(--text); }
+  .nav-links a.active { color: var(--text); font-weight: 600; }
+  .header-bar { display: flex; align-items: center; width: 100%; justify-content: center; }
+  .nav-toggle { display: none; }
+  @media (max-width: 820px) {
+    .site-header .container { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 0; min-height: 60px; }
+    .header-bar { justify-content: flex-end; }
+    .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: rgba(251,251,253,0.97); border-bottom: 1px solid rgba(29,29,31,0.08); backdrop-filter: blur(18px); z-index: 30; padding: 0.5rem 0; }
+    .nav-links.open { display: flex; }
+    .nav-links a { padding: 0.9rem 1.5rem; font-size: 1rem; border-bottom: 1px solid rgba(29,29,31,0.06); }
+    .nav-links a:last-child { border-bottom: none; }
+    .nav-toggle { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid rgba(29,29,31,0.1); border-radius: 12px; background: rgba(255,255,255,0.8); color: var(--text); cursor: pointer; }
+    .grid { grid-template-columns: 1fr; }
+  }
+  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 1.25rem; border: 1px solid rgba(184,151,42,0.3); background: rgba(255,255,255,0.9); color: var(--text); font-weight: 600; font-size: 0.9rem; letter-spacing: 0.01em; border-radius: 6px; transition: border-color 180ms ease, background 180ms ease, color 180ms ease; }
+  .btn:hover { border-color: var(--gold); background: var(--gold-soft); color: var(--gold); }
+  .btn-primary { border-color: var(--gold); background: transparent; color: var(--gold); font-family: "Cormorant Garamond", Georgia, serif; font-size: 1rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; box-shadow: none; }
+  .btn-primary:hover { background: var(--gold); color: #fff; border-color: var(--gold); }
+  main { padding: 3rem 0 4rem; }
+  .intro { display: grid; gap: 1rem; margin-bottom: 2rem; }
+  .eyebrow { font-size: 0.78rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.18em; }
+  h1 { margin: 0; font-family: "Cormorant Garamond", Georgia, serif; font-size: clamp(2.8rem, 7vw, 4.8rem); letter-spacing: -0.02em; line-height: 0.95; }
+  .intro p { margin: 0; max-width: 45rem; color: var(--muted); font-size: 1.02rem; line-height: 1.8; }
+  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.2rem; }
+  .card { overflow: hidden; border-radius: var(--radius); background: var(--card); border: 1px solid rgba(184,151,42,0.1); box-shadow: var(--shadow); display: grid; transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease; }
+  .card:hover { border-color: rgba(184,151,42,0.28); box-shadow: 0 28px 56px rgba(184,151,42,0.1); transform: translateY(-3px); }
+  .card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center; background: #f5f3ef; }
+  .copy { padding: 1.15rem 1.15rem 1.35rem; display: grid; gap: 0.7rem; }
+  .meta { display: flex; align-items: start; justify-content: space-between; gap: 1rem; }
+  .meta h2 { margin: 0; font-family: "Cormorant Garamond", Georgia, serif; font-size: 1.4rem; letter-spacing: 0; }
+  .price { color: var(--gold); font-weight: 700; white-space: nowrap; font-size: 0.95rem; }
+  .copy p { margin: 0; color: var(--muted); line-height: 1.7; font-size: 0.93rem; }
+  .copy a { width: fit-content; margin-left: auto; }
+  .qty-selector { display: flex; gap: 0.4rem; padding: 0.65rem 0 0; border-top: 1px solid var(--line); }
+  .qty-btn { flex: 1; padding: 0.35rem 0; font-size: 0.75rem; font-weight: 600; font-family: "Inter", sans-serif; color: var(--muted); background: transparent; border: 1px solid var(--line); border-radius: 5px; cursor: pointer; transition: border-color 150ms, background 150ms, color 150ms; text-align: center; }
+  .qty-btn:hover { border-color: rgba(184,151,42,0.4); color: var(--text); }
+  .qty-btn.active { border-color: var(--gold); background: var(--gold-soft); color: var(--gold); }
+  .qty-label { font-size: 0.7rem; color: var(--muted); margin-bottom: 0.3rem; }
+  .selected-price { font-size: 1.05rem; font-weight: 700; color: var(--gold); min-height: 1.5rem; }
+  footer { padding: 0 0 2rem; }
+  .foot { color: var(--muted); font-size: 0.9rem; }
+  @media (max-width: 960px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) { .header .container { padding: 0.85rem 0 1rem; } .brand img { width: 86px; height: auto; } .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" aria-label="Stutz Delights home">
+        <img class="brand-logo" src="logo-transparent.svg" alt="Stutz Delights logo">
+      </a>
+      <div class="header-bar">
+        <nav class="nav-links" id="nav-links" aria-label="Primary navigation">
+          <a href="index.html">Home</a>
+          <a href="cakes.html">Cakes</a>
+          <a href="desserts.html">Desserts</a>
+          <a href="truffles.html" class="active">Truffles</a>
+          <a href="index.html#inquiry">Order Inquiry</a>
+        </nav>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+      <section class="intro">
+        <span class="eyebrow">Truffles</span>
+        <h1>Browse the truffle selection.</h1>
+      </section>
+      <section class="grid" id="grid"></section>
+    </div>
+  </main>
+  <footer><div class="container foot">Stutz Delights truffles catalog.</div></footer>
+<script>
+const tiers = [["6 pc","$14"],["15 pc","$28"],["50 pc","$75"],["100 pc","$140"]];
+const items = [
+  { title: "Classic Chocolate", file: "Truffles/optimized_Classic Chocolate.jpg", description: "Rich and creamy Brazilian chocolate truffle, finished with a coating of chocolate sprinkles." },
+  { title: "Dulce de Leche", file: "Truffles/optimized_Dulce de Leche.jpg", description: "Creamy dulce de leche truffle finished with a delicate swirl of dulce de leche and a hint of cinnamon." },
+  { title: "Coconut", file: "Truffles/optimized_Coconut.jpg", description: "Silky coconut truffle made with coconut milk and coated in delicate shredded coconut." },
+  { title: "Creme Brulee", file: "Truffles/optimized_Creme Brulee.jpg", description: "Creamy vanilla truffle finished with a delicate caramelized sugar crust." },
+  { title: "Guava", file: "Truffles/optimized_Guava.jpg", description: "Creamy guava truffle inspired by Brazil's iconic Romeo & Juliet dessert, finished with a heart of guava." },
+  { title: "Lemon", file: "Truffles/optimized_Lemon.jpg", description: "Creamy lime truffle infused with fresh lime juice and finished with delicate lime zest." },
+  { title: "Chocolate with Orange", file: "Truffles/optimized_Chocolate Orange.jpg", description: "Rich chocolate brigadeiro delicately finished with fresh orange zest." },
+];
+const catalogIndex = {
+  cakes: ["abacaxi","blueberry","crocante","dois amores","maracauja","midnight","nozes","nutella","pintura","pistache","prestigio","red velvet"],
+  desserts: ["dessert assortment","signature dessert table","featured dessert selection","mousse de maracuja com chocolate","tiramisu manga","uva"],
+  truffles: items.map((item) => item.title.toLowerCase())
+};
+const params = new URLSearchParams(window.location.search);
+const searchTerm = (params.get("search") || "").trim().toLowerCase();
+const grid = document.getElementById("grid");
+const visibleItems = searchTerm ? items.filter((item) => item.title.toLowerCase().includes(searchTerm)) : items;
+const renderItems = visibleItems.length ? visibleItems : items;
+renderItems.forEach((item) => {
+  const href = `index.html?product=${encodeURIComponent("Truffles")}&item=${encodeURIComponent(item.title)}#inquiry`;
+  const card = document.createElement("article");
+  card.className = "card";
+  const cardId = item.title.replace(/\s+/g, "_");
+  const btnHtml = tiers.map(([qty], i) => `<button class="qty-btn${i === 0 ? " active" : ""}" data-price="${tiers[i][1]}" data-qty="${qty}" onclick="selectQty(this,'${cardId}')">${qty}</button>`).join("");
+  card.innerHTML = `
+    <img src="${item.file}" alt="${item.title}">
+    <div class="copy">
+      <div class="meta">
+        <h2>${item.title}</h2>
+      </div>
+      <p>${item.description}</p>
+      <div class="qty-selector">${btnHtml}</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:0.6rem;">
+        <span class="selected-price" id="price_${cardId}">${tiers[0][1]}</span>
+        <a class="btn btn-primary" href="${href}">Add to Order</a>
+      </div>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+function selectQty(btn, cardId) {
+  btn.closest(".qty-selector").querySelectorAll(".qty-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  document.getElementById("price_" + cardId).textContent = btn.dataset.price;
+}
+
+const navToggle = document.getElementById("nav-toggle");
+const navLinks = document.getElementById("nav-links");
+navToggle.addEventListener("click", () => {
+  const open = navLinks.classList.toggle("open");
+  navToggle.setAttribute("aria-expanded", open);
+});
+navLinks.querySelectorAll("a").forEach(a => {
+  a.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    navToggle.setAttribute("aria-expanded", "false");
+  });
+});
+</script>
+</body>
+</html>
