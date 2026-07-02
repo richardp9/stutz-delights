@@ -1081,9 +1081,12 @@
     .inquiry-section .container,
     .footer-grid,
     .testimonials-grid,
-    .trust-grid,
-    .categories-grid {
+    .trust-grid {
       grid-template-columns: 1fr;
+    }
+
+    .categories-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .gallery-card {
